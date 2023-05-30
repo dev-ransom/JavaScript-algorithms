@@ -1,39 +1,21 @@
-/* three ways of solving sum of all numbers between two elements of arrays"*/
-/*function sumAll(arr){
-    let first = arr[0];
-    let last = arr[1];
-    let sum = 0;
-    if(first > last){
-        first = arr[1];
-        last = arr[0];
-    }
-    // loop running through
-    for (let i = first; i <= last; i++){
-        sum += i;
-    }
-    return sum;
-}
-let result = sumAll([1,4]); */
+/** Write a function that splits an array (first argument) into groups the length of size (second argument) and returns them as a two-dimensional array. */
 
-// function sumAll(arr){
-//     let max = Math.max(arr[0], arr[1]);
-//     let min = Math.min(arr[0], arr[1]);
-//     let sumBetween = 0;
-//     for (let i = min; i <= max; i++){
-//         sumBetween += i;
-//     }
-//     return sumBetween;
-// }
-
-// let result = sumAll([1,4]);
-// console.log(result);
-function sumAll(arr){
-    let sum = 0;
-    for (let i = Math.min(...arr); i <= Math.max(...arr); i++){
-        sum += i;
+function chunkArrayInGroups(arr, size){
+    let bigArr = [];
+    let smallArr = [];
+    let subctr = 0;
+    for (let i = 0; i < arr.length; i++){
+        if(subctr === size){
+            subctr = 0;
+            bigArr.push(smallArr);
+            smallArr = [];
+        }
+        smallArr.push(arr[i]);
+        subctr++;
     }
-    return sum;
+    bigArr.push(smallArr);
+    return bigArr;
 }
 
-let result = sumAll([1,4]);
+let result = chunkArrayInGroups([0, 1, 2, 3, 4, 5, 6], 3);
 console.log(result);
